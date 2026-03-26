@@ -1,7 +1,10 @@
 import  pickle
+import os
 import sklearn.compose._column_transformer as _ct
 
 import pandas as pd
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Patch for loading models pickled with sklearn 1.6.x in sklearn 1.8+
 if not hasattr(_ct, '_RemainderColsList'):
@@ -11,7 +14,7 @@ if not hasattr(_ct, '_RemainderColsList'):
     _ct._RemainderColsList = _RemainderColsList
 
 # import the ml model
-with open ('model/model.pkl','rb') as f:
+with open (os.path.join(BASE_DIR, 'model.pkl'),'rb') as f:
     model = pickle.load(f)
 
 #MLFlow

@@ -1,8 +1,9 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from schema.user_input import UserInput
-from model.predict import predict_output, model , MODEL_VERSION 
+from model.predict import predict_output, model , MODEL_VERSION
 from schema.prediction_reponse import PredictionResponse
+import uvicorn
 
 
 
@@ -45,7 +46,5 @@ def predict_premium(data:UserInput):
        return JSONResponse(status_code=500,content={'error':str(e)})
 
 
-
-
-        
-    
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
